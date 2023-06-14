@@ -1,0 +1,16 @@
+h1{
+    text-align: center;
+}
+.section{
+    margin: 2rem 5rem;
+    display: grid;
+    grid-template: 1fr/1fr 1fr 1fr;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5rem;
+}
+select{
+    border-radius: 1rem;
+    font-size: 1.5rem;
+    padding: 0.4rem;
+}
