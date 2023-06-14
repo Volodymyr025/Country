@@ -1,9 +1,7 @@
 const country = document.querySelector('#country')
 const city = document.querySelector('#city')
 const street = document.querySelector('#street')
-const defaultCountry = document.querySelector('#defaultCountry')
-const defaultCountry2 = document.querySelector('#defaultCountry2')
-const defaultCountry3 = document.querySelector('#defaultCountry3')
+
 
 
 
@@ -79,8 +77,8 @@ function changeCountryMethod (e, countr, index) {
     if(+e.target.value === index){
         city.innerHTML = `<option id="defaultCountry" label="City" disabled selected></option>`
         street.innerHTML = `<option id="defaultCountry" label="Street" disabled selected></option>`
-        defaultCountry2.selected = true
-        defaultCountry3.selected = true
+        city.firstElementChild.selected = true
+        street.firstElementChild.selected = true
         city.disabled = false
         street.disabled = true
         createOption (countryList[countr].city, city)
@@ -94,7 +92,7 @@ function changeCityMethod (e, cit, countr, index) {
     countr = country.options[country.selectedIndex].text
     if(+e.target.value === index - 1){
         street.innerHTML = `<option id="defaultCountry" label="Street" disabled selected></option>`
-        defaultCountry3.selected = true
+        street.firstElementChild.selected = true
         street.disabled = false
         createOption (countryList[countr].streets[cit], street)
         return
