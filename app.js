@@ -62,15 +62,15 @@ const countryList = {
 
 
 
-function createOption (nameParam, objParam) {
-    for(let i = 0; i < nameParam.length; i++){
+function createOption (objParam, placeParam) {
+    for(let i = 0; i < objParam.length; i++){
         let el = document.createElement('option')
-        el[i] += `<option value="${[i]}">${nameParam[i]}</option>`
-        objParam.innerHTML += el[i]
+        el[i] += `<option value="${[i]}">${objParam[i]}</option>`
+        placeParam.innerHTML += el[i]
     }
     }
     
-// Enabled city
+// Enable city
 function changeCountryMethod (e, countr, index) {
     index = country.selectedIndex
     countr = country.options[country.selectedIndex].text
