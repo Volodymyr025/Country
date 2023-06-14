@@ -7,7 +7,7 @@ const street = document.querySelector('#street')
 
 const countryList = {
   Austria: {
-    city: ['Burgenland','Carinthia','LowerAustria','Salzburg','Vienna'],
+    cities: ['Burgenland','Carinthia','LowerAustria','Salzburg','Vienna'],
     streets: {
         Burgenland: ['Güssinger Str','Brunnergraben','Gamischdorf','Waldhäuser','Lenzhäuser'],
         Carinthia: ['Mallnitz','Flattach','Hermagor','Villach','Althofen'],
@@ -17,7 +17,7 @@ const countryList = {
     }
   },
   Belgium: {
-    city: ['Antwerp','Anderlecht','Bruges','Brussels','Namur'],
+    cities: ['Antwerp','Anderlecht','Bruges','Brussels','Namur'],
     streets: {
         Antwerp: ['Antwerp Chinatown','El callejón Vlaeykens','Wijngaardstraat','Pedestrian tunnel','Nationalestraat'],
         Anderlecht: ['Althofen','Bad Gastein','Flattach','Friesach','Ferlach'],
@@ -27,7 +27,7 @@ const countryList = {
     }
   },
   CzechRepublic: {
-    city: ['Praha','Brno','Olomouc','Plzen','KutnaHora'],
+    cities: ['Praha','Brno','Olomouc','Plzen','KutnaHora'],
     streets: {
         Praha: ['st.New Town','st.Kongresová','Ukrajinská','Zvonařky','Wenzigova'],
         Brno: ['Údolní','Vachova','Zábrdovice','Veveří','Černopolní'],
@@ -37,7 +37,7 @@ const countryList = {
     }
   },
   France: {
-    city: ['Paris','Nice','Marseille','Limoges','Chartres'],
+    cities: ['Paris','Nice','Marseille','Limoges','Chartres'],
     streets: {
         Paris:['Montmartre','Champ de Mars','Jehan Rictus','Panthéon','Rue Cauchy'],
         Nice:['Vernier','Cimiez','Mantega','116 Pasteur','Pessicart'],
@@ -47,7 +47,7 @@ const countryList = {
     }
   },
   Ukraine: {
-    city: ['Kyiv','Ternopil','Lviv','Chernivsi','Odesa'],
+    cities: ['Kyiv','Ternopil','Lviv','Chernivsi','Odesa'],
     streets: {
         Kyiv: ['Velyka Vasylkivska','Zhylianska St','Hospitalna St','Ioanna Pavla II','Mechnykova St'],
         Ternopil: ['Tarasa Shevchenka','Torhovytsia','Zamchyshche','Ivana Franka','Klinichna St'],
@@ -70,7 +70,7 @@ function createOption (nameParam, objParam) {
     }
     }
     
-
+// Enabled city
 function changeCountryMethod (e, countr, index) {
     index = country.selectedIndex
     countr = country.options[country.selectedIndex].text
@@ -81,11 +81,12 @@ function changeCountryMethod (e, countr, index) {
         street.firstElementChild.selected = true
         city.disabled = false
         street.disabled = true
-        createOption (countryList[countr].city, city)
+        createOption (countryList[countr].cities, city)
         return
     }
 }
 
+// Enable street
 function changeCityMethod (e, cit, countr, index) {
     index = city.selectedIndex
     cit = city.options[city.selectedIndex].text
