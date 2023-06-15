@@ -1,11 +1,11 @@
-const country = document.querySelector('#country')
-const city = document.querySelector('#city')
-const street = document.querySelector('#street')
+const contrySelect = document.querySelector('#country')
+const citySelect = document.querySelector('#city')
+const streetSelect = document.querySelector('#street')
+
+let selectedCountry = ''
 
 
-
-
-const countryList = {
+const COUNTRY_LIST = {
   Austria: {
     cities: ['Burgenland','Carinthia','LowerAustria','Salzburg','Vienna'],
     streets: {
@@ -59,51 +59,46 @@ const countryList = {
 }
 
  
-
-
-
 function createOption (objParam, placeParam) {
     for(let i = 0; i < objParam.length; i++){
         let el = document.createElement('option')
-        el[i] += `<option value="${[i]}">${objParam[i]}</option>`
+        el[i] += `<option value="${objParam[i]}">${objParam[i]}</option>`
         placeParam.innerHTML += el[i]
     }
     }
     
-// Enable city
-function changeCountryMethod (e, countr, index) {
-    index = country.selectedIndex
-    countr = country.options[country.selectedIndex].text
-    if(+e.target.value === index){
-        city.innerHTML = `<option id="defaultCountry" label="City" disabled selected></option>`
+  function setupCitySelect () {
+    citySelect.innerHTML = `<option id="defaultCountry" label="City" disabled selected></option>`
+    citySelect.firstElementChild.selected = true
+    citySelect.disabled = false
+  }
+
+  const setupStreetSelect = (isDisabled) => {
         street.innerHTML = `<option id="defaultCountry" label="Street" disabled selected></option>`
-        city.firstElementChild.selected = true
         street.firstElementChild.selected = true
-        city.disabled = false
-        street.disabled = true
-        createOption (countryList[countr].cities, city)
-        return
+        street.disabled = isDisabled
+  }
+// Enable citySelect
+function changeCountryMethod (e, countr) {
+        setupCitySelect()
+        setupStreetSelect (true)
+        selectedCountry = e.target.value
+        createOption (COUNTRY_LIST[e.target.value].cities, citySelect)
     }
-}
+  
 
 // Enable street
-function changeCityMethod (e, cit, countr, index) {
-    index = city.selectedIndex
-    cit = city.options[city.selectedIndex].text
-    countr = country.options[country.selectedIndex].text
-    if(+e.target.value === index - 1){
-        street.innerHTML = `<option id="defaultCountry" label="Street" disabled selected></option>`
-        street.firstElementChild.selected = true
-        street.disabled = false
-        createOption (countryList[countr].streets[cit], street)
-        return
+function handleChangeStreet (e, cit, countr) {
+    setupStreetSelect (false)
+    createOption (COUNTRY_LIST[selectedCountry].streets[e.target.value], streetSelect)
     }
-}
 
 
 
-country.addEventListener('change',changeCountryMethod)
-city.addEventListener('change',changeCityMethod)
+contrySelect.addEventListener('change',changeCountryMethod)
+citySelect.addEventListener('change',handleChangeStreet)
+
+
 
 
 
